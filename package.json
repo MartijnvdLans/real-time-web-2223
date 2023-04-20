@@ -1,0 +1,19 @@
+{
+  "name": "real-time-web-2223",
+  "version": "1.0.0",
+  "description": "- [Synopsis](#synopsis)\r - [Description](#description)\r - [Communication](#communication)\r - [Goals](#goals)\r - [Grading](#grading)\r - [Programme](#programme)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Martijn van der Lans",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "path": "^0.12.7",
+    "socket.io": "^4.6.1"
+  }
+}

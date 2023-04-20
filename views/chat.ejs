@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <title>Chatapp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main id="chatbox">
+        <h1>Tipsy Tales</h1>
+        <section class="box">
+            <section>
+                <!-- <h2>Anoniem is een vraag aan het beantwoorden ...</h2> -->
+                <!-- <h2>Wat is je favoriete drank?</h2>
+                <p>Wodka cola</p> -->
+                <!-- <ul class="result-box">
+                    <li class="result">
+                        Resultaten:
+                        <ul class="inner">
+                            <li class="correct-banner">Correct geantwoord:
+                                <ul class="correct">
+                                    <li>${username}</li>
+                                    <li>${username}</li>
+                                    <li>${username}</li>
+                                </ul>
+                            </li>
+                            <li class="incorrect-banner">Incorrect geantwoord:
+                                <ul class="incorrect">
+                                    <li>${username}</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul> -->
+                <p class="time">2:00</p>
+            </section>
+            <section>
+                <span class="online"></span><p id="user-count">${users.count} online</p>
+                <ul id="online-users">
+                </ul>
+            </section>
+            <section>
+                <ul class="main-ul">
+                    <!-- <li class="ano">Iemand is anoniem een vraag aan het beantwoorden</li> -->
+                    <!-- <li class="ano-player">Jij bent deze ronde anoniem. Als iedereen weet te raden dat jij de anonieme schrijver bent verlies je 1 punt.</li> -->
+                </ul>
+                <p class="typing"></p>
+                <form id="chatroom">
+                    <input id="message-input" autocomplete="off" />
+                    <button>send</button>
+                </form>
+            </section>
+        </section>
+    </main>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+    <!-- <script src="whiteboard.js"></script> -->
+</body>
+</html>
