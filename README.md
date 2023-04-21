@@ -13,7 +13,7 @@
 Clone the repository to your local files with:
 
 ```
-git clone https://github.com/MartijnvdLans/real-time-web-2223.git
+git clone https://rtw-real-time-chat.onrender.com/
 ```
 
 Install the needed packages with:
