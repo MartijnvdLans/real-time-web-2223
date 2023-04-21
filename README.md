@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-## About the appp
+## About the app
 
 ## Live Demo
 
