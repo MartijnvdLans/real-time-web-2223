@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header></header>
     <main id="chatbox">
-        <h1>Tipsy Tales</h1>
         <section class="box">
             <section>
-                <!-- <h2>Anoniem is een vraag aan het beantwoorden ...</h2> -->
+                <div class="inner">
+                    <!-- <h2>Anoniem is een vraag aan het beantwoorden ...</h2> -->
                 <!-- <h2>Wat is je favoriete drank?</h2>
                 <p>Wodka cola</p> -->
                 <!-- <ul class="result-box">
@@ -39,6 +40,7 @@
                     </li>
                 </ul> -->
                 <p class="time">2:00</p>
+                </div>
             </section>
             <section>
                 <span class="online"></span><p id="user-count">${users.count} online</p>
@@ -46,10 +48,12 @@
                 </ul>
             </section>
             <section>
-                <ul class="main-ul">
-                    <!-- <li class="ano">Iemand is anoniem een vraag aan het beantwoorden</li> -->
-                    <!-- <li class="ano-player">Jij bent deze ronde anoniem. Als iedereen weet te raden dat jij de anonieme schrijver bent verlies je 1 punt.</li> -->
-                </ul>
+                <div class="chat-opmaak">
+                    <ul class="main-ul">
+                        <!-- <li class="ano">Iemand is anoniem een vraag aan het beantwoorden</li> -->
+                        <!-- <li class="ano-player">Jij bent deze ronde anoniem. Als iedereen weet te raden dat jij de anonieme schrijver bent verlies je 1 punt.</li> -->
+                    </ul>
+                </div>
                 <p class="typing"></p>
                 <form id="chatroom">
                     <input id="message-input" autocomplete="off" />
