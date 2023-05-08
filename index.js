@@ -13,11 +13,33 @@ app.set('views', 'views');
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: false }));
 
-let users = []
+let users = {}
+let pokemon = []
+let usercount = 0
+
+let sortedData
 
 app.get('/', (req, res) => {
     res.render('index')
 })
+
+const randomPokemon = async () => {
+  let pokeNummer = Math.floor(Math.random() * 151);
+  const endpoint = `https://pokeapi.co/api/v2/pokemon/`
+  const url = `${endpoint}` + pokeNummer
+  const pokeData = await fetchData(url)
+  sortedData = pokeData
+  return sortedData
+}
+
+async function fetchData(url){
+  const apiData = await fetch(url)
+      .then(response => response.json())
+      // if the request fails the error message will be shown in the console
+      .catch(err => console.log(err))
+  // returns the fetched data
+  return apiData
+};
 
 app.get('/chat', (req, res) => {
     res.render('chat')
@@ -30,13 +52,18 @@ io.on("connection", (socket) => {
   })
 
     socket.on('user connected', username => {
-        users.push({
+        users[socket.id] = {
             username: username,
-            points: 10,
+            points: 0,
             id: socket.id
-        })
+        }
         io.emit('new user', (users))
         console.log(users)
+        randomPokemon()    
+        .then(results  => {
+        console.log(results.forms[0].name)
+        io.emit('user-connected', results)
+    })
     })
 
   console.log("a user connected");
@@ -51,23 +78,42 @@ io.on("connection", (socket) => {
   })
 
   socket.on("message", msg => {
-
     io.emit("message", {
       username: msg.username,
       message: msg.message
     });
+
+    if(msg.message.toLowerCase() === sortedData.forms[0].name) {
+      console.log('antwoord is correct')
+      io.emit("good-guess", users)
+      
+      console.log(users[socket.id].username)
+      users[socket.id].points++
+      console.log(users)
+}
   });
+
+  socket.on("new-pokemon", ()=>{
+    randomPokemon()
+    .then(results  => {
+        io.emit("random-pokemon", results)
+        io.emit("update-scoreBoard", users)
+        console.log(results.forms[0].name)
+    })
+})
 
   socket.on('disconnect', username => {
     let name = ''
 
-    users.forEach(user => {
-        if (user.id === socket.id) {
-            name = username
+    // users.forEach(user => {
+    //     if (user.id === socket.id) {
+    //         name = username
 
-            users = users.filter(user => user.id != socket.id)
-        }
-    })
+    //         users = users.filter(user => user.id != socket.id)
+    //     }
+    // })
+
+    delete users[socket.id]
 
     io.emit('new user', (users))
 })

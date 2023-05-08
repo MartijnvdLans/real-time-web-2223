@@ -1,4 +1,3 @@
-
 let socket = io();
 const chatMain = document.querySelector('#chatbox')
 const loginMain = document.querySelector('#loginRoom')
@@ -7,7 +6,8 @@ const userCount = document.querySelector('#user-count')
 const chatUl = document.querySelector('.main-ul')
 const urlParams = new URLSearchParams(window.location.search) // create a URLSearchParams that searches for parameters in the searchbar
 const username = urlParams.get('username') // get the username parameter
-console.log('username')
+const createImage = document.createElement('img')
+const pokImgCont = document.querySelector('.pokeBox')
 
 socket.emit('user connected', username) // send the server socket the username of the client that has joined
 
@@ -64,18 +64,21 @@ if (chatMain) {
         })
 
         socket.on('new user', users => {
-            joinedUser.innerHTML = ""
+            if (users.username !== null) {
+                joinedUser.innerHTML = ""
             
 
-            let userAmount = users.length
-
+                let userAmount = Object.getOwnPropertyNames(users).length
+            
+            console.log(users)
+            
             if (userAmount == 1) {
                 userCount.innerHTML = `${userAmount} person online`
             } else {
                 userCount.innerHTML = `${userAmount} people online`
             }
 
-            users.forEach(user => {
+            Object.values(users).forEach((user)=>{
                 let userItem = document.createElement('li')
                 
                 userItem.textContent = user.username + `: ${user.points}`
@@ -85,8 +88,58 @@ if (chatMain) {
                 }
 
                 joinedUser.appendChild(userItem)
-            });
+              })
+            }
         })
+
+        socket.on("user-connected", (results) => {
+            createImage.src = results.sprites.other.dream_world.front_default
+            createImage.alt = "pokemon image" 
+            pokImgCont.appendChild(createImage)
+          });
+
+          socket.on("random-pokemon", results => {
+            createImage.src = ""
+        
+            createImage.src = results.sprites.other.dream_world.front_default
+            createImage.alt = "pokemon image" 
+            pokImgCont.appendChild(createImage)
+        })
+          
+
+          socket.on("good-guess", users => {
+            let messageLine = document.createElement('li')
+            
+            messageLine.textContent = `${users[socket.id].username} guessed the pokémon! They get 1 point rewarded to them!`
+            chatUl.appendChild(messageLine)
+            messageLine.classList.add('correct-banner')
+            messages.scrollTop = messages.scrollHeight
+            getNewPokemon()
+          })
+
+          function getNewPokemon() {
+            setTimeout(function () {
+              socket.emit("new-pokemon");
+            }, 200);
+          }
+
+          socket.on('update-scoreBoard', users => {
+            joinedUser.innerHTML = ""
+
+            Object.values(users).forEach((user)=>{
+                let userItem = document.createElement('li')
+                
+                userItem.textContent = user.username + `: ${user.points}`
+
+                if (user.username === username) {
+                    userItem.classList.add('joinedUser')
+                }
+
+                joinedUser.appendChild(userItem)
+              })
+          }) 
+
+
 }
 
 if (loginMain) {
