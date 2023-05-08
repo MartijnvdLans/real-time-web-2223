@@ -47,6 +47,7 @@ app.get('/chat', (req, res) => {
 })
 
 io.on("connection", (socket) => {
+  usercount++
 
   socket.on('new user', username => {
     io.emit('new user', username)
@@ -58,13 +59,13 @@ io.on("connection", (socket) => {
             points: 0,
             id: socket.id
         }
-        io.emit('new user', (users))
-        console.log(users)
-        randomPokemon()    
+        randomPokemon()
         .then(results  => {
-        console.log(results.forms[0].name)
-        io.emit('user-connected', results)
-    })
+          io.emit("random-pokemon", results)
+          io.emit("update-scoreBoard", users)
+          console.log(results.forms[0].name)
+      })
+        io.emit('new user', (users))
     })
 
   console.log("a user connected");
@@ -86,33 +87,34 @@ io.on("connection", (socket) => {
 
     if(msg.message.toLowerCase() === sortedData.forms[0].name) {
       console.log('antwoord is correct')
-      io.emit("good-guess", users)
+      io.emit("good-guess", {
+        username: msg.username
+      })
       
-      console.log(users[socket.id].username)
+      console.log(users[socket.id])
       users[socket.id].points++
       console.log(users)
+      randomPokemon()
+        .then(results  => {
+          io.emit("random-pokemon", results)
+          io.emit("update-scoreBoard", users)
+          console.log(results.forms[0].name)
+        })
 }
   });
 
-  socket.on("new-pokemon", ()=>{
-    randomPokemon()
-    .then(results  => {
-        io.emit("random-pokemon", results)
-        io.emit("update-scoreBoard", users)
-        console.log(results.forms[0].name)
-    })
-})
+//   socket.on("new-pokemon", ()=>{
+//     randomPokemon()
+//     .then(results  => {
+//         io.emit("random-pokemon", results)
+//         io.emit("update-scoreBoard", users)
+//         console.log(results.forms[0].name)
+//     })
+// })
 
   socket.on('disconnect', username => {
-    let name = ''
-
-    // users.forEach(user => {
-    //     if (user.id === socket.id) {
-    //         name = username
-
-    //         users = users.filter(user => user.id != socket.id)
-    //     }
-    // })
+    usercount--
+    console.log(usercount)
 
     delete users[socket.id]
 

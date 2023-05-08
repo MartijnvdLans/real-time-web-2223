@@ -78,6 +78,7 @@ section section:nth-child(1) img {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 15em;
 }
 
 .inner {
@@ -156,12 +157,12 @@ section section:nth-child(3) p {
     left: 0;
     display: flex;
     width: 100%;
-    background-color: green;
 }
 
 #message-input {
     padding: 1em;
     width: 100%;
+    margin: .5em
 }
 
 #name-form {
@@ -177,6 +178,7 @@ section section:nth-child(3) p {
 
 button { 
     padding: 1em;
+    margin: .5em;
 }
 
 
@@ -238,6 +240,8 @@ p {
     border: 4px double #d4af37;
     text-align: center;
     font-style: italic;
+    width: 100%;
+    margin: .5em 0;
 }
 
 .incorrect-banner {

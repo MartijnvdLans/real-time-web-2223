@@ -107,21 +107,21 @@ if (chatMain) {
         })
           
 
-          socket.on("good-guess", users => {
+          socket.on("good-guess", msg => {
             let messageLine = document.createElement('li')
             
-            messageLine.textContent = `${users[socket.id].username} guessed the pokémon! They get 1 point rewarded to them!`
+            messageLine.textContent = `${msg.username} guessed the pokémon! They get 1 point rewarded to them!`
             chatUl.appendChild(messageLine)
             messageLine.classList.add('correct-banner')
             messages.scrollTop = messages.scrollHeight
-            getNewPokemon()
+            // getNewPokemon()
           })
 
-          function getNewPokemon() {
-            setTimeout(function () {
-              socket.emit("new-pokemon");
-            }, 200);
-          }
+        //   function getNewPokemon() {
+        //     setTimeout(function () {
+        //       socket.emit("new-pokemon");
+        //     }, 200);
+        //   }
 
           socket.on('update-scoreBoard', users => {
             joinedUser.innerHTML = ""
