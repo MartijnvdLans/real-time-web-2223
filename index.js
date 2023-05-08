@@ -3,7 +3,7 @@ const app = express();
 const http = require("http").createServer(app);
 const path = require("path");
 const io = require("socket.io")(http);
-// const fetch = require('node-fetch');
+const fetch = require('node-fetch');
 const port = process.env.PORT || 3000;
 
 // set templating engine
