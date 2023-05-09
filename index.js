@@ -63,7 +63,7 @@ io.on("connection", (socket) => {
         .then(results  => {
           io.emit("random-pokemon", results)
           io.emit("update-scoreBoard", users)
-          console.log(results.forms[0].name)
+          // console.log(results.forms[0].name)
       })
         io.emit('new user', (users))
     })
@@ -98,7 +98,7 @@ io.on("connection", (socket) => {
         .then(results  => {
           io.emit("random-pokemon", results)
           io.emit("update-scoreBoard", users)
-          console.log(results.forms[0].name)
+          // console.log(results.forms[0].name)
         })
 }
   });

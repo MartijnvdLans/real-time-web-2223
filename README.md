@@ -62,38 +62,42 @@ npm start
 
 ## Data Model
 
-t.b.a.
+<img src="./wiki-images/data-model.png" WIDTH="100%">
 
 ## Real Time Events
 
 ### Connect
 
-t.b.a.
+This is the main event from Socket. It check if there is a connection to socket.
 
 ### User Connect
 
-t.b.a.
+This is an event that lets you know a new user has joined the server, cuasing the leaderboard to update and add them onto it.
 
 ### Message
 
-t.b.a.
+This event gets triggered when a user sends a message into the chat. It send 1 message and shows it on all open clients.
 
 ### Answer
 
-t.b.a.
+This event gets triggered when someone answers the name of a pokémon correctly.
 
 ### Random Pokémon
 
-t.b.a.
+This event gets fired on 2 occaisions. Firstly when a new user joins so they can start playing with the group straight away and when someone answers the question correctly.
 
 ### Update Scoreboard
 
-t.b.a.
+This event gets fired when someone answers the pokémon correctly. It updates the amount of points all users have.
 
 ### User Disconnect
 
-t.b.a.
+this event gets fired when a user leaves the server, causing the server to reload the leaderboard deleting them.
 
 ## Data Life Cycle
 
 <img src="./wiki-images/datalifecycle.png" WIDTH="100%">
+
+## Lisence
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
