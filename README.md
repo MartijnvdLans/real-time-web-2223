@@ -96,7 +96,7 @@ this event gets fired when a user leaves the server, causing the server to reloa
 
 ## Data Life Cycle
 
-<img src="./wiki-images/datalifecycle.png" WIDTH="100%">
+<img src="./wiki-images/datalifecycle.jpg" WIDTH="100%">
 
 ## Lisence
 
