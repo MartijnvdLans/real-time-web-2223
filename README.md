@@ -80,7 +80,7 @@ const randomPokemon = async () => {
 
 When you call the API you get the following dataset:
 
-<img src="./wiki-images/apidata.jpg" WIDTH="100%">
+<img src="./wiki-images/apidata.png" WIDTH="100%">
 
 
 ## Data Model
