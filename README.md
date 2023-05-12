@@ -60,6 +60,28 @@ npm start
 * Node-Fetch
 * Socket.io
 
+## External API
+
+Voor mijn project maak ik gebruik van de Pokémon API. Deze API heeft veel informatie over alle pokémon die er op het moment bestaan. Voor mijn project heb ik gekozen om alleen de pokémon van Gen 1 te gebruiken. Dit zijn de eerste 151 pokémon in de database.
+
+Om een random gegenereerde pokémon terug te krijgen uit de database gebruik ik de volgende code:
+
+``` js
+const randomPokemon = async () => {
+  let pokeNummer = Math.floor(Math.random() * 151);
+  const endpoint = `https://pokeapi.co/api/v2/pokemon/`
+  const url = `${endpoint}` + pokeNummer
+  const pokeData = await fetchData(url)
+  sortedData = pokeData
+  return sortedData
+}
+```
+
+Wanneer je de API op roept krijg je de volgende code terug gestuurt:
+
+<img src="./wiki-images/apidata.jpg" WIDTH="100%">
+
+
 ## Data Model
 
 <img src="./wiki-images/data-model.jpg" WIDTH="100%">
