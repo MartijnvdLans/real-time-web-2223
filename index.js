@@ -15,7 +15,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: false }));
 
 let users = {}
-let pokemon = []
 let usercount = 0
 
 let sortedData
@@ -25,6 +24,7 @@ app.get('/', (req, res) => {
 })
 
 const randomPokemon = async () => {
+  // Fetches a random pokémon from the first Generation (151 pokémon)
   let pokeNummer = Math.floor(Math.random() * 151);
   const endpoint = `https://pokeapi.co/api/v2/pokemon/`
   const url = `${endpoint}` + pokeNummer
@@ -73,6 +73,7 @@ io.on("connection", (socket) => {
 //   socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
 
   socket.on('typing', (data) => {
+    // Check if someone if typing to broadcast this to the other users
     if(data.typing==true)
        io.emit('display', data)
     else
@@ -85,6 +86,7 @@ io.on("connection", (socket) => {
       message: msg.message
     });
 
+    // Changes string to lowercase to check if the name is correct
     if(msg.message.toLowerCase() === sortedData.forms[0].name) {
       console.log('antwoord is correct')
       io.emit("good-guess", {
@@ -102,15 +104,6 @@ io.on("connection", (socket) => {
         })
 }
   });
-
-//   socket.on("new-pokemon", ()=>{
-//     randomPokemon()
-//     .then(results  => {
-//         io.emit("random-pokemon", results)
-//         io.emit("update-scoreBoard", users)
-//         console.log(results.forms[0].name)
-//     })
-// })
 
   socket.on('disconnect', username => {
     usercount--

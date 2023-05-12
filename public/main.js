@@ -11,7 +11,7 @@ const pokImgCont = document.querySelector('.pokeBox')
 
 socket.emit('user connected', username) // send the server socket the username of the client that has joined
 
-if (chatMain) {
+if (chatMain) { // Makes sure if you're on the right HTML page so consts wont conflict.
     let messages = document.querySelector('section section:nth-of-type(3) ul')
     let input = document.querySelector('#message-input')
 
@@ -27,6 +27,7 @@ if (chatMain) {
         }
       });
 
+      // Check wether someone is typing and send it to the server
       document.querySelector('#chatroom').addEventListener('keypress', e => {
         if(e.which!=13) {
             typing = true
@@ -41,7 +42,7 @@ if (chatMain) {
     socket.on('message', msg => {
         let messageLine = document.createElement('li')
         
-        if (msg.username === username) {
+        if (msg.username === username) { // Check is the one sending it is the same as ur client name
             messageLine.textContent = `${msg.username}: ` + msg.message
             messageLine.classList.add('me')            
         } else {
@@ -51,7 +52,9 @@ if (chatMain) {
         chatUl.appendChild(messageLine)
         messages.scrollTop = messages.scrollHeight
       });
-      
+
+
+      // Someone is typing. This code shows the client who is typing
       socket.on('display', (data)=>{
           if(data.typing==true)
           if (data.username === username) {
@@ -68,7 +71,7 @@ if (chatMain) {
                 joinedUser.innerHTML = ""
             
 
-                let userAmount = Object.getOwnPropertyNames(users).length
+                let userAmount = Object.getOwnPropertyNames(users).length // Get list lenght to see how many users are online
             
             console.log(users)
             
@@ -78,7 +81,7 @@ if (chatMain) {
                 userCount.innerHTML = `${userAmount} people online`
             }
 
-            Object.values(users).forEach((user)=>{
+            Object.values(users).forEach((user)=>{ // Creates a list item for every person on the the website
                 let userItem = document.createElement('li')
                 
                 userItem.textContent = user.username + `: ${user.points}`
@@ -93,6 +96,7 @@ if (chatMain) {
         })
 
         socket.on("user-connected", (results) => {
+          // Fetches a new pokémon everytime someone new joins the server so that everyone can play along right away
             createImage.src = results.sprites.other.dream_world.front_default
             createImage.alt = "pokemon image" 
             pokImgCont.appendChild(createImage)
@@ -142,7 +146,7 @@ if (chatMain) {
 
 }
 
-if (loginMain) {
+if (loginMain) { // Makes sure if you're on the right HTML page so consts wont conflict.
     let username = document.querySelector('#username')
 
 document.querySelector('#name-form').addEventListener('submit', event => {
