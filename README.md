@@ -62,9 +62,10 @@ npm start
 
 ## External API
 
-Voor mijn project maak ik gebruik van de Pokémon API. Deze API heeft veel informatie over alle pokémon die er op het moment bestaan. Voor mijn project heb ik gekozen om alleen de pokémon van Gen 1 te gebruiken. Dit zijn de eerste 151 pokémon in de database.
 
-Om een random gegenereerde pokémon terug te krijgen uit de database gebruik ik de volgende code:
+For my porject I make use of the Pokémon API. This API contains a lot of information about every pokémon there currently is. For this project, I decided to choose the first 151 pokémon, which are Generation 1 pokémon to make it easier (for myself).
+
+To fetch a random pokémon from the database, I use the following code:
 
 ``` js
 const randomPokemon = async () => {
@@ -77,7 +78,7 @@ const randomPokemon = async () => {
 }
 ```
 
-Wanneer je de API op roept krijg je de volgende code terug gestuurt:
+When you call the API you get the following dataset:
 
 <img src="./wiki-images/apidata.jpg" WIDTH="100%">
 
